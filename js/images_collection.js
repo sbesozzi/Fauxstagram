@@ -1,16 +1,16 @@
 import Backbone from 'backbone';
-import imageModel from './image_model';
+import ImageModel from './image_model';
 
-let imagesCollection = Backbone.Collection.extend( {
+let ImagesCollection = Backbone.Collection.extend( {
 
   url: 'https://api.parse.com/1/classes/images',
 
-  model: imageModel,
+  model: ImageModel,
 
-  parse(data) {
+  parse: function(data) {
     return data.results;
   }
 
 });
 
-export default imagesCollection;
+export default ImagesCollection;

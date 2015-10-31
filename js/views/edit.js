@@ -1,15 +1,19 @@
-function editTemplate (data) {
-  return `
+// import React from 'react';
 
-    <div class="edit">
-      <h3>Edit Image</h3>
-      <form>
-        <label>Edit Photo: <input type="file" class="edit-image"</label><br>
-      </form>
-      <button class="edit-button" data-to>Edit</button>
-    </div>
+// export default React.createClass({
 
-  `;
-}
+//   render() {
 
-export default editTemplate;
+//     return (
+//       <div add>
+//         <h3>Edit Image</h3>
+//         <form onSubmit={this.submitHandler}>
+//           <label onChange={this.updateMessage} type="file">
+//         </form>
+//         <button onClick={this.addHandler}>Add</button>
+//       </div>
+
+//     );
+//   }
+// });
+

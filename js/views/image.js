@@ -1,15 +1,24 @@
-function imageTemplate(data) {
-  return `
+import React from 'react';
+import images from './images';
 
-    <div class="image">
-      <div class="photo">
-        <p class="back-button" data-to>
-          <i class='fa fa-arrow-left'></i>
-        </p>
+
+let image = React.createClass({
+
+  clickHandler(event) {
+    this.props.onSelect(this.props.id);
+
+  },
+
+  render() {
+
+    return (
+      <div className="image" onClick={this.clickHandler}>
+        <img src={this.props.src}/>
+        <button>Edit</button>
       </div>
-    </div>
+    );
+  }
 
-  `;
-}
+});
 
-export default imageTemplate;
+export default image;

@@ -1,11 +1,17 @@
 import Backbone from 'backbone';
 
-let imageModel = Backbone.Model.extend( {
+let ImageModel = Backbone.Model.extend( {
 
   urlRoot: 'https://api.parse.com/1/classes/images',
 
-  idAttribute: 'objectId'
+  idAttribute: 'objectId',
+
+  templateData() {
+    let data= this.toJSON();
+    return data;
+  }
 
 });
 
-export default imageModel;
+
+export default ImageModel;

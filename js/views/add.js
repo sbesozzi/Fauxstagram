@@ -1,15 +1,17 @@
-function addTemplate (data) {
-  return `
+// import React from 'react';
 
-    <div class="add">
-      <h3>Add Image</h3>
-      <form>
-        <label>Upload Photo: <input type="file" class="image"</label><br>
-      </form>
-      <button class="save-button" data-to>Save</button>
-    </div>
+// export default React.createClass({
 
-  `;
-}
+//   render() {
+//     return  (
+//       <div>
+//         <h3>Add Image</h3>
+//         <form onSubmit={this.submitHandler}>
+//           <label onInput={this.updateMessage} type="file"/>/>
+//         <button onClick={this.addHandler}>Add</button>
+//       </div>
+//     );
+//   }
 
-export default addTemplate;
+// });
+

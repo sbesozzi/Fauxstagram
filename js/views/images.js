@@ -1,22 +1,34 @@
-function processData(data) {
-  console.log(data);
-  return data.map(function(item) {
-    return`
-      <li class="image-list-item" data-image-id="${item.objectId}">
-      </li>
-      `;
+import React from 'react';
+import image from './image';
 
-  }).join('');
-}
 
-function imagesTemplate(data) {
-  console.log('images template');
-  return `
-    <div class="images-list">               
-      <ul>${processData(data)}</ul>
-    </div>
+let images = React.createClass( {
 
-  `;
-}
+  // getInitialState() {
+  selectHandler(id) {
+    this.props.onImageSelect(id);
+  },
 
-export default imagesTemplate;
+  processImages(data) {
+    console.log('get image');
+    return (
+      <div>
+
+        <image src={data.Photo} id={data.objectId} onImageSelect={this.selectHandler}/>
+       </div>
+    );
+
+  },
+
+  render() {
+    return (
+      <div className="image-list">
+        {this.props.data.map(this.processImages)}
+      </div>
+    );
+  }
+
+});
+
+export default images;
+
