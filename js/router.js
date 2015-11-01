@@ -23,23 +23,27 @@ export default Backbone.Router.extend( {
     "image/:id" : "showImage", 
     "add"       : "showAdd",
     "edit"      : "showEdit"
+
   },
 
   // Initialize//
   initialize(appElement) {
-
     this.el = appElement;
     this.images = new ImagesCollection();
+
+
   },
 
   goto(route) {
     this.navigate(route, {
       trigger: true
     });
+
   },
 
   render(component) {
     ReactDom.render(component, this.el);
+
   },
 
 
@@ -50,9 +54,8 @@ export default Backbone.Router.extend( {
     this.images.fetch().then(() => {
       this.render(
         <ImagesComponent 
-          // onImageSelect={this.selectImage.bind(this)}
           onImageSelect={(id) => this.goto('image/' + id)}
-          data={this.images.toJSON()}/>
+          data={ this.images.toJSON()}/>
       );
     });
 
@@ -60,32 +63,48 @@ export default Backbone.Router.extend( {
 
 
 
-  // Select Image View  //
-  selectImage(id) {
-    this.navigate('images/' + id, {trigger: true});
-  },
-
-  // Single Image View //
   showImage(id) {
     console.log('show image page');
-    // .find() is like .filter()
-    let image = this.data.find(data => data.objectId === id);
+    let img = this.images.get(id);
 
-    this.render(
-      <ImageComponent src={data.Photo}/>, this.el);
-  
+    if (img) {
+      this.render(
+        <ImageComponent
+          onBackClick={() => this.goto('image')}
+          onEditClick={(id) => this.goto('edit/' + id)}
+          data={img.toJSON()}/>
+      );
+      
+    } else {
+      img = this.images.add({objectId: id});
+      img.fetch().then(() => {
+        this.render(
+          <ImageComponent
+            onBackClick={() => this.goto('image')}
+            onEditClick={(id) => this.goto('edit/' + id)}
+            data={img.toJSON()}/>
+        );
+      });
+    }
+
   },
 
+ 
 
 
 
   showEdit() {
+    console.log('show edit page');
+
     this.render( 
       <EditComponent/>
     );
+
   },
 
   showAdd() {
+    console.log('show add page');
+
     this.render(
       <AddComponent/>
 
@@ -100,6 +119,7 @@ export default Backbone.Router.extend( {
     this.render(
       <SpinnerComponent/>
     );
+
   },
 
   // Redirect //
@@ -108,6 +128,7 @@ export default Backbone.Router.extend( {
       replace: true,
       trigger: true
     });
+
   },
 
 
@@ -115,6 +136,7 @@ export default Backbone.Router.extend( {
   start() {
     Backbone.history.start();
     return this;
+
   },
 
 

@@ -9,14 +9,18 @@
 
 header {
   width: 100%;
-  height: 60px;
+  height: 100px;
 }
 
 .profile {
   width: 100%;
-  height: 80px;
+  height: 500px;
   margin: auto;
-  display: inline;
+
+  // div {
+  // display: inline;
+  // }
+}
 
 .profile-image {
   margin: 0;
@@ -26,15 +30,37 @@ header {
   border: 1px solid grey;
 }
 
+
+.profile-info {
+  width: 400px;
+  
+}
+
+.profile-desc {
+  h3 {
+    width: 400px;
+    margin: 0;
+  }
+}
+
 .profile-follow {
   h4 {
     display: inline;
   }
 }
 
+.profile-title {
+  h3 {
+    width: 200px;
+    margin: 0;
+  }
 
-
+  a {
+    width: 200px;
+    margin: 0;
+  }
 }
+
 
 .image-list {
   width: 100%;
@@ -43,7 +69,7 @@ header {
 
 img {
   margin: 20px;
-  width: 25%;
+  width: 22%;
   height: auto;
   display: inline-block;
   float: left;

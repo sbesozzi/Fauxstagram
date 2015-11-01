@@ -176,11 +176,11 @@ exports['default'] = _backbone2['default'].Router.extend({
     "image/:id": "showImage",
     "add": "showAdd",
     "edit": "showEdit"
+
   },
 
   // Initialize//
   initialize: function initialize(appElement) {
-
     this.el = appElement;
     this.images = new _images_collectionJs2['default']();
   },
@@ -202,36 +202,53 @@ exports['default'] = _backbone2['default'].Router.extend({
     console.log('show images page');
 
     this.images.fetch().then(function () {
-      _this.render(_react2['default'].createElement(_viewsImages2['default'],
-      // onImageSelect={this.selectImage.bind(this)}
-      { onImageSelect: function (id) {
+      _this.render(_react2['default'].createElement(_viewsImages2['default'], {
+        onImageSelect: function (id) {
           return _this.goto('image/' + id);
         },
         data: _this.images.toJSON() }));
     });
   },
 
-  // Select Image View  //
-  selectImage: function selectImage(id) {
-    this.navigate('images/' + id, { trigger: true });
-  },
-
-  // Single Image View //
   showImage: function showImage(id) {
-    console.log('show image page');
-    // .find() is like .filter()
-    var image = this.data.find(function (data) {
-      return data.objectId === id;
-    });
+    var _this2 = this;
 
-    this.render(_react2['default'].createElement(_viewsImage2['default'], { src: data.Photo }), this.el);
+    console.log('show image page');
+    var img = this.images.get(id);
+
+    if (img) {
+      this.render(_react2['default'].createElement(_viewsImage2['default'], {
+        onBackClick: function () {
+          return _this2.goto('image');
+        },
+        onEditClick: function (id) {
+          return _this2.goto('edit/' + id);
+        },
+        data: img.toJSON() }));
+    } else {
+      img = this.images.add({ objectId: id });
+      img.fetch().then(function () {
+        _this2.render(_react2['default'].createElement(_viewsImage2['default'], {
+          onBackClick: function () {
+            return _this2.goto('image');
+          },
+          onEditClick: function (id) {
+            return _this2.goto('edit/' + id);
+          },
+          data: img.toJSON() }));
+      });
+    }
   },
 
   showEdit: function showEdit() {
+    console.log('show edit page');
+
     this.render(_react2['default'].createElement(_viewsEdit2['default'], null));
   },
 
   showAdd: function showAdd() {
+    console.log('show add page');
+
     this.render(_react2['default'].createElement(_viewsAdd2['default'], null));
   },
 
@@ -264,14 +281,15 @@ module.exports = exports['default'];
 
 // import React from 'react';
 
-// export default React.createClass({
+// let add = React.createClass({
 
 //   render() {
+
 //     return  (
-//       <div>
-//         <h3>Add Image</h3>
-//         <form onSubmit={this.submitHandler}>
-//           <label onInput={this.updateMessage} type="file"/>/>
+//       <div className="add">
+//         <h3>Add</h3>
+//         <form onSubmit={this.submitHandler}/>
+//         <label onInput={this.updateMessage} type="file"/>
 //         <button onClick={this.addHandler}>Add</button>
 //       </div>
 //     );
@@ -279,26 +297,30 @@ module.exports = exports['default'];
 
 // });
 
+// export default add;
+
 },{}],7:[function(require,module,exports){
 "use strict";
 
 // import React from 'react';
 
-// export default React.createClass({
+// let edit = React.createClass({
 
 //   render() {
 
 //     return (
-//       <div className="add">
-//   <h3>Edit Image</h3>
-//   // <form onSubmit={this.submitHandler}>
-//   //   <label onChange={this.updateMessage} type="file">/>
-//   // <button onClick={this.addHandler}>Add</button>
-// </div>
+//       <div className="edit">
+//         <h3>Edit</h3>
+//         <form onSubmit={this.submitHandler}>
+//           <label onChange={this.updateMessage} type="file">/>
+//         <button onClick={this.addHandler}>Add</button>
+//       </div>
 
 //     );
 //   }
 // });
+
+// export default edit;
 
 },{}],8:[function(require,module,exports){
 "use strict";
@@ -322,11 +344,17 @@ var image = _react2["default"].createClass({
     this.props.onSelect(this.props.id);
   },
 
-  render: function render() {
+  render: function render(data) {
     return _react2["default"].createElement(
       "div",
-      { className: "image", onClick: this.clickHandler },
-      _react2["default"].createElement("img", { src: this.props.data.Photo }),
+      { className: "image", key: this.props.images.objectId,
+        onSelect: this.clickHandler },
+      _react2["default"].createElement("image", { src: this.props.data.Photo }),
+      _react2["default"].createElement(
+        "div",
+        { className: "about" },
+        this.data.About
+      ),
       _react2["default"].createElement(
         "button",
         null,
@@ -371,11 +399,16 @@ var images = _react2['default'].createClass({
   },
 
   processImages: function processImages(data) {
+    var _this = this;
+
     console.log('process image');
     return _react2['default'].createElement(
       'div',
-      { key: data.objectId },
-      _react2['default'].createElement('image', { src: data.Photo, id: data.objectId, onImageSelect: this.selectHandler })
+      { key: data.objectId,
+        onImageSelect: function () {
+          return _this.selectHandler(data.objectId);
+        } },
+      _react2['default'].createElement('image', { src: data.Photo, id: data.objectId })
     );
   },
 

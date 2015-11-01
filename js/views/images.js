@@ -12,8 +12,9 @@ let images = React.createClass( {
   processImages(data) {
     console.log('process image');
     return (
-      <div key={data.objectId} >
-        <image src={data.Photo} id={data.objectId} onImageSelect={this.selectHandler}/>
+      <div key={data.objectId} 
+        onImageSelect={() => this.selectHandler(data.objectId)}>
+        <image src={data.Photo} id={data.objectId} />
        </div>
     );
 

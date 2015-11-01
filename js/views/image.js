@@ -9,11 +9,14 @@ let image = React.createClass({
 
   },
 
-  render() {
+  render(data) {
     return (
       
-      <div className="image" onClick={this.clickHandler}>
-        <img src={this.props.data.Photo}/>
+      <div className="image" key={this.props.images.objectId} 
+          onSelect={this.clickHandler}>
+        <image src={this.props.data.Photo}/>
+        <div className="about">{this.data.About}
+        </div>
         <button>Edit</button>
         <button>Back</button>
       </div>
