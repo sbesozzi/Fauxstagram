@@ -1,5 +1,5 @@
 import React from 'react';
-import images from './images';
+// import images from './images';
 
 
 let image = React.createClass({
@@ -10,11 +10,12 @@ let image = React.createClass({
   },
 
   render() {
-
     return (
+      
       <div className="image" onClick={this.clickHandler}>
-        <img src={this.props.src}/>
+        <img src={this.props.data.Photo}/>
         <button>Edit</button>
+        <button>Back</button>
       </div>
     );
   }

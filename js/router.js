@@ -25,7 +25,7 @@ export default Backbone.Router.extend( {
     "edit"      : "showEdit"
   },
 
-  // Initialize/////////////////
+  // Initialize//
   initialize(appElement) {
 
     this.el = appElement;
@@ -43,55 +43,66 @@ export default Backbone.Router.extend( {
   },
 
 
-  // Home View /////////////////////////
+  // Home View //
   showImages() {
     console.log('show images page');
 
     this.images.fetch().then(() => {
       this.render(
         <ImagesComponent 
-        onImageSelect={this.selectImage.bind(this)}
-        data={this.images.toJSON()}/>
+          // onImageSelect={this.selectImage.bind(this)}
+          onImageSelect={(id) => this.goto('image/' + id)}
+          data={this.images.toJSON()}/>
       );
     });
 
   },
 
-  // Single Image View  //////////////////////
+
+
+  // Select Image View  //
   selectImage(id) {
-    // alert('got id') + id);
     this.navigate('images/' + id, {trigger: true});
   },
 
-  // Single Image View //////////////////////////
+  // Single Image View //
   showImage(id) {
     console.log('show image page');
     // .find() is like .filter()
-    let image = this.image.find(item => item.objectId === id);
-    this.render(<ImageComponent src={data.url}/>, this.el);
+    let image = this.data.find(data => data.objectId === id);
+
+    this.render(
+      <ImageComponent src={data.Photo}/>, this.el);
   
   },
 
-  // showEdit() {
 
-  // },
 
-  // showAdd() {
-  //   this.render() {
-  //     <AddComponent
-  //       on
-  //   }
+
+  showEdit() {
+    this.render( 
+      <EditComponent/>
+    );
+  },
+
+  showAdd() {
+    this.render(
+      <AddComponent/>
+
+    );
+
+  },
 
   // }
 
-  // Spinner ///////////////////////////
+  // Spinner //
   showSpinner() {
     this.render(
       <SpinnerComponent/>
     );
   },
 
-  // Redirect ////////////////////////
+  // Redirect //
   redirectToImages() {
     this.navigate('images', {
       replace: true,

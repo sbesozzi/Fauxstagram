@@ -178,7 +178,7 @@ exports['default'] = _backbone2['default'].Router.extend({
     "edit": "showEdit"
   },
 
-  // Initialize/////////////////
+  // Initialize//
   initialize: function initialize(appElement) {
 
     this.el = appElement;
@@ -195,53 +195,54 @@ exports['default'] = _backbone2['default'].Router.extend({
     _reactDom2['default'].render(component, this.el);
   },
 
-  // Home View /////////////////////////
+  // Home View //
   showImages: function showImages() {
     var _this = this;
 
     console.log('show images page');
 
     this.images.fetch().then(function () {
-      _this.render(_react2['default'].createElement(_viewsImages2['default'], {
-        onImageSelect: _this.selectImage.bind(_this),
+      _this.render(_react2['default'].createElement(_viewsImages2['default'],
+      // onImageSelect={this.selectImage.bind(this)}
+      { onImageSelect: function (id) {
+          return _this.goto('image/' + id);
+        },
         data: _this.images.toJSON() }));
     });
   },
 
-  // Single Image View  //////////////////////
+  // Select Image View  //
   selectImage: function selectImage(id) {
-    // alert('got id') + id);
     this.navigate('images/' + id, { trigger: true });
   },
 
-  // Single Image View //////////////////////////
+  // Single Image View //
   showImage: function showImage(id) {
     console.log('show image page');
     // .find() is like .filter()
-    var image = this.image.find(function (item) {
-      return item.objectId === id;
+    var image = this.data.find(function (data) {
+      return data.objectId === id;
     });
-    this.render(_react2['default'].createElement(_viewsImage2['default'], { src: data.url }), this.el);
+
+    this.render(_react2['default'].createElement(_viewsImage2['default'], { src: data.Photo }), this.el);
   },
 
-  // showEdit() {
+  showEdit: function showEdit() {
+    this.render(_react2['default'].createElement(_viewsEdit2['default'], null));
+  },
 
-  // },
-
-  // showAdd() {
-  //   this.render() {
-  //     <AddComponent
-  //       on
-  //   }
+  showAdd: function showAdd() {
+    this.render(_react2['default'].createElement(_viewsAdd2['default'], null));
+  },
 
   // }
 
-  // Spinner ///////////////////////////
+  // Spinner //
   showSpinner: function showSpinner() {
     this.render(_react2['default'].createElement(_viewsSpinner2['default'], null));
   },
 
-  // Redirect ////////////////////////
+  // Redirect //
   redirectToImages: function redirectToImages() {
     this.navigate('images', {
       replace: true,
@@ -288,62 +289,63 @@ module.exports = exports['default'];
 //   render() {
 
 //     return (
-//       <div add>
-//         <h3>Edit Image</h3>
-//         <form onSubmit={this.submitHandler}>
-//           <label onChange={this.updateMessage} type="file">
-//         </form>
-//         <button onClick={this.addHandler}>Add</button>
-//       </div>
+//       <div className="add">
+//   <h3>Edit Image</h3>
+//   // <form onSubmit={this.submitHandler}>
+//   //   <label onChange={this.updateMessage} type="file">/>
+//   // <button onClick={this.addHandler}>Add</button>
+// </div>
 
 //     );
 //   }
 // });
 
 },{}],8:[function(require,module,exports){
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _images = require('./images');
+// import images from './images';
 
-var _images2 = _interopRequireDefault(_images);
-
-var image = _react2['default'].createClass({
-  displayName: 'image',
+var image = _react2["default"].createClass({
+  displayName: "image",
 
   clickHandler: function clickHandler(event) {
     this.props.onSelect(this.props.id);
   },
 
   render: function render() {
-
-    return _react2['default'].createElement(
-      'div',
-      { className: 'image', onClick: this.clickHandler },
-      _react2['default'].createElement('img', { src: this.props.src }),
-      _react2['default'].createElement(
-        'button',
+    return _react2["default"].createElement(
+      "div",
+      { className: "image", onClick: this.clickHandler },
+      _react2["default"].createElement("img", { src: this.props.data.Photo }),
+      _react2["default"].createElement(
+        "button",
         null,
-        'Edit'
+        "Edit"
+      ),
+      _react2["default"].createElement(
+        "button",
+        null,
+        "Back"
       )
     );
   }
 
 });
 
-exports['default'] = image;
-module.exports = exports['default'];
+exports["default"] = image;
+module.exports = exports["default"];
 
-},{"./images":9,"react":170}],9:[function(require,module,exports){
+},{"react":170}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -369,10 +371,10 @@ var images = _react2['default'].createClass({
   },
 
   processImages: function processImages(data) {
-    console.log('get image');
+    console.log('process image');
     return _react2['default'].createElement(
       'div',
-      null,
+      { key: data.objectId },
       _react2['default'].createElement('image', { src: data.Photo, id: data.objectId, onImageSelect: this.selectHandler })
     );
   },
@@ -380,8 +382,61 @@ var images = _react2['default'].createClass({
   render: function render() {
     return _react2['default'].createElement(
       'div',
-      { className: 'image-list' },
-      this.props.data.map(this.processImages)
+      { className: 'images-view' },
+      _react2['default'].createElement('header', null),
+      _react2['default'].createElement(
+        'div',
+        { className: 'profile' },
+        _react2['default'].createElement('div', { className: 'profile-image' }),
+        _react2['default'].createElement(
+          'div',
+          { className: 'profile-info' },
+          _react2['default'].createElement(
+            'div',
+            { className: 'profile-title' },
+            _react2['default'].createElement(
+              'h3',
+              null,
+              'Sarah Besozzi'
+            ),
+            _react2['default'].createElement('a', null)
+          ),
+          _react2['default'].createElement(
+            'div',
+            { className: 'profile-desc' },
+            _react2['default'].createElement(
+              'h3',
+              null,
+              'Description'
+            )
+          ),
+          _react2['default'].createElement(
+            'div',
+            { className: 'profile-follow' },
+            _react2['default'].createElement(
+              'h4',
+              null,
+              'posts'
+            ),
+            _react2['default'].createElement(
+              'h4',
+              null,
+              'follower'
+            ),
+            _react2['default'].createElement(
+              'h4',
+              null,
+              'following'
+            )
+          )
+        )
+      ),
+      _react2['default'].createElement(
+        'div',
+        { className: 'image-list' },
+        this.props.data.map(this.processImages)
+      ),
+      _react2['default'].createElement('footer', null)
     );
   }
 

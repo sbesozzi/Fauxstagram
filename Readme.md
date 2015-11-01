@@ -1,7 +1,6 @@
-## Welcome to My Project
+## Faux Instagram 
 
-> I am your Readme.md file, you should probably update me.
-
+> Creating a faux Instagram app using Backbone and React
 
 ## Usage
 
