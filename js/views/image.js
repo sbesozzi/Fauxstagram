@@ -12,13 +12,15 @@ let image = React.createClass({
   render(data) {
     return (
       
-      <div className="image" key={this.props.images.objectId} 
+      <div className="image" key={this.props.data.objectId} 
           onSelect={this.clickHandler}>
         <image src={this.props.data.Photo}/>
-        <div className="about">{this.data.About}
+        <div className="about">{this.props.data.About}
         </div>
-        <button>Edit</button>
-        <button>Back</button>
+        <div className="image-button">
+          <button>Edit</button>
+          <button>Back</button>
+        </div>
       </div>
     );
   }

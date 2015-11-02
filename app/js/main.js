@@ -448,23 +448,27 @@ var image = _react2["default"].createClass({
   render: function render(data) {
     return _react2["default"].createElement(
       "div",
-      { className: "image", key: this.props.images.objectId,
+      { className: "image", key: this.props.data.objectId,
         onSelect: this.clickHandler },
       _react2["default"].createElement("image", { src: this.props.data.Photo }),
       _react2["default"].createElement(
         "div",
         { className: "about" },
-        this.data.About
+        this.props.data.About
       ),
       _react2["default"].createElement(
-        "button",
-        null,
-        "Edit"
-      ),
-      _react2["default"].createElement(
-        "button",
-        null,
-        "Back"
+        "div",
+        { className: "image-button" },
+        _react2["default"].createElement(
+          "button",
+          null,
+          "Edit"
+        ),
+        _react2["default"].createElement(
+          "button",
+          null,
+          "Back"
+        )
       )
     );
   }
