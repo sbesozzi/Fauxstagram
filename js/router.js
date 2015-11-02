@@ -95,7 +95,7 @@ export default Backbone.Router.extend( {
 
     this.render( 
       <EditComponent
-      onBackSelect={() => this.goto('image/' + id)}
+      onBackSelect={() => this.goto('')}
       onEditSelect={() => {
         let newEdit = new ImageModel ({
           Photo: newPhoto

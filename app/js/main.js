@@ -252,7 +252,7 @@ exports['default'] = _backbone2['default'].Router.extend({
 
     this.render(_react2['default'].createElement(_viewsEdit2['default'], {
       onBackSelect: function () {
-        return _this3.goto('image/' + id);
+        return _this3.goto('');
       },
       onEditSelect: function () {
         var newEdit = new _image_modelJs2['default']({
