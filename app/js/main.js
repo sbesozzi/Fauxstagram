@@ -220,6 +220,9 @@ exports['default'] = _backbone2['default'].Router.extend({
         onBackSelect: function () {
           return _this2.goto('');
         },
+        onAddSelect: function (id) {
+          return _this2.goto('add');
+        },
         onEditSelect: function (id) {
           return _this2.goto('edit/' + id);
         },
@@ -230,6 +233,9 @@ exports['default'] = _backbone2['default'].Router.extend({
         _this2.render(_react2['default'].createElement(_viewsImage2['default'], {
           onBackSelect: function () {
             return _this2.goto('');
+          },
+          onAddSelect: function (id) {
+            return _this2.goto('add');
           },
           onEditSelect: function (id) {
             return _this2.goto('edit/' + id);
@@ -463,6 +469,10 @@ var image = _react2["default"].createClass({
     this.props.onEditSelect();
   },
 
+  addHandler: function addHandler() {
+    this.props.onAddSelect();
+  },
+
   backHandler: function backHandler() {
     this.props.onBackSelect();
   },
@@ -484,6 +494,13 @@ var image = _react2["default"].createClass({
               return _this.editHandler();
             } },
           "Edit"
+        ),
+        _react2["default"].createElement(
+          "button",
+          { onClick: function () {
+              return _this.addHandler();
+            } },
+          "Add"
         ),
         _react2["default"].createElement(
           "button",

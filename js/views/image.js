@@ -14,6 +14,11 @@ let image = React.createClass({
 
   },
 
+  addHandler() {
+    this.props.onAddSelect();
+
+  },
+
   backHandler() {
     this.props.onBackSelect();
     
@@ -29,6 +34,7 @@ let image = React.createClass({
         
         <div>
           <button onClick={() => this.editHandler()}>Edit</button>
+          <button onClick={() => this.addHandler()}>Add</button>
           <button onClick={() => this.backHandler()}>Back</button>
         </div>
       </div>

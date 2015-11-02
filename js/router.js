@@ -69,6 +69,7 @@ export default Backbone.Router.extend( {
       this.render(
         <ImageComponent
           onBackSelect={() => this.goto('')}
+          onAddSelect={(id) => this.goto('add')}
           onEditSelect={(id) => this.goto('edit/' + id)}
           data={img.toJSON()}/>
       );
@@ -79,6 +80,7 @@ export default Backbone.Router.extend( {
         this.render(
           <ImageComponent
             onBackSelect={() => this.goto('')}
+            onAddSelect={(id) => this.goto('add')}
             onEditSelect={(id) => this.goto('edit/' + id)}
             data={img.toJSON()}/>
         );
