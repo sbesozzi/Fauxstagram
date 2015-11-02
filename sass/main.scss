@@ -9,6 +9,7 @@
 
 }
 
+// Images View
 .images-view {
   background-color: #FAFAFA;
 
@@ -45,13 +46,15 @@ header {
     text-align: center;
   }
 
-  h5 {
+  a {
     width: 222px;
     margin: 0;
     padding-right: 151px;
     float: right;
     color: #125688;
     font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif;
+    text-decoration: none;
+    font-size: 14px;
 
   }
 }
@@ -72,10 +75,26 @@ header {
   width: 152px;
   height: 152px;
   border-radius: 100px;
-  border: 1px solid grey;
   float: left;
+  background: url(https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/s640x640/sh0.08/e35/12105186_1017270565013559_139675607_n.jpg) ;
+  background-size: 100%;
+}
 
-  // background-image: 12074580_10101918451444953_7844651665022322350_n.jpg;
+.profile-title {
+  color: #4b4f54;
+
+  
+  h3 {
+    width: 250px;
+    margin: 0;
+    font-size: 30px;
+
+  }
+
+  a {
+    width: 200px;
+    margin: 0;
+  }
 }
 
 
@@ -83,13 +102,13 @@ header {
   width: 585px;
   margin-right: 0;
   float: right;
-  font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif;
+  font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif 100;
   
 }
 
 
 .profile-desc {
-  padding-top: 10px;
+  padding-top: 20px;
 
   
   h3 {
@@ -102,7 +121,7 @@ header {
 }
 
 .profile-follow {
-  padding-top: 10px;
+  padding-top: 40px;
 
   
   h4 {
@@ -114,27 +133,9 @@ header {
   }
 }
 
-.profile-title {
-  color: #4b4f54;
-
-  
-  h3 {
-    width: 250px;
-    margin: 0;
-    font-size: 34px;
-
-  }
-
-  a {
-    width: 200px;
-    margin: 0;
-  }
-}
-
-
 .image-list {
-  width: 900px;
-  height: 1280px;
+  width: 965px;
+  height: 1350px;
   margin: auto;
   clear: both;
   padding: 40px 0 40px 0;
@@ -195,5 +196,17 @@ footer {
     padding-top: 2px;
   }
 
+  div:before { 
+    content:"\00a9"; 
+  }
+
 
 }
+
+// Add View
+
+// .add {
+
+//   background-color: #FAFAFA;
+
+// }

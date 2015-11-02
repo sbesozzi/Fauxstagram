@@ -505,7 +505,7 @@ var images = _react2['default'].createClass({
     return _react2['default'].createElement(
       'div',
       { key: data.objectId,
-        onImageSelect: function () {
+        onClick: function () {
           return _this.selectHandler(data.objectId);
         } },
       _react2['default'].createElement('image', { src: data.Photo, id: data.objectId })
@@ -526,8 +526,8 @@ var images = _react2['default'].createClass({
         ),
         _react2['default'].createElement('input', { placeholder: 'Search', type: 'text' }),
         _react2['default'].createElement(
-          'h5',
-          null,
+          'a',
+          { href: '#' },
           'Log out'
         )
       ),
@@ -544,7 +544,7 @@ var images = _react2['default'].createClass({
             _react2['default'].createElement(
               'h3',
               null,
-              'Sarah Besozzi'
+              'sarah besozzi'
             ),
             _react2['default'].createElement('a', null)
           ),
@@ -554,7 +554,7 @@ var images = _react2['default'].createClass({
             _react2['default'].createElement(
               'h3',
               null,
-              'puppy momma . tomboy . vintage hunter daydreamsonvinyl.tumblr.com'
+              'puppy momma . tomboy . vintage hunter . daydreamsonvinyl.tumblr.com'
             )
           ),
           _react2['default'].createElement(
@@ -647,7 +647,7 @@ var images = _react2['default'].createClass({
         _react2['default'].createElement(
           'div',
           null,
-          '2015 Sarah Besozzi'
+          ' 2015 Sarah Besozzi'
         )
       )
     );
