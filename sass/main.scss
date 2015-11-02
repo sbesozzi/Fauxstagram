@@ -1,6 +1,7 @@
 @import "bourbon";
 @import "neat";
 @import "font-awesome";
+@import url(https://fonts.googleapis.com/css?family=Rochester);
 
 .container {
   width: 100%;
@@ -16,8 +17,43 @@
 header {
   width: 100%;
   height: 78px;
+  padding-top: 25px;
+  padding-left: 110px;
   border-bottom: 1px solid #EDEEEE;
   background-color: white;
+  // display: inline;
+  // float: left;
+
+  h4 {
+  width: 100px;
+  margin: 0;
+  padding-left: 60px;
+  font-family: 'Rochester', cursive;
+  font-size: 19px;
+  float: left;
+  }
+
+  input {
+   border-radius: 15px;
+    border: solid 1px #edeeee;
+    font-size: 14px;
+    height: 30px;
+    outline: none;
+    margin-left: 295px;
+    padding: 3px 10px 3px 26px;
+    width: 220px;
+    text-align: center;
+  }
+
+  h5 {
+    width: 222px;
+    margin: 0;
+    padding-right: 151px;
+    float: right;
+    color: #125688;
+    font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif;
+
+  }
 }
 
 .profile {
@@ -26,6 +62,7 @@ header {
   margin: auto;
   padding: 50px 50px;
   width: 935px;
+  height: 140px;
   margin: auto;
   // display: inline;
 }
@@ -43,29 +80,49 @@ header {
 
 
 .profile-info {
-  width: 400px;
+  width: 585px;
   margin-right: 0;
   float: right;
+  font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif;
   
 }
 
+
 .profile-desc {
+  padding-top: 10px;
+
+  
   h3 {
-    width: 400px;
+    width: 800px;
     margin: 0;
+    color: #4b4f54;
+    font-size: 16px;
+
   }
 }
 
 .profile-follow {
+  padding-top: 10px;
+
+  
   h4 {
+    color: #4b4f54;
+    font-size: 16px;
     display: inline;
+    padding-right: 20px;
+
   }
 }
 
 .profile-title {
+  color: #4b4f54;
+
+  
   h3 {
-    width: 200px;
+    width: 250px;
     margin: 0;
+    font-size: 34px;
+
   }
 
   a {
@@ -77,8 +134,12 @@ header {
 
 .image-list {
   width: 900px;
+  height: 1280px;
   margin: auto;
   clear: both;
+  padding: 40px 0 40px 0;
+
+
 }
 
 img {
@@ -93,6 +154,7 @@ img {
   width: 120px;
   height: 120px;
   margin: auto;
+  // padding: 40px 0 40px 0;
   border: 2px solid #468EE1;
   border-radius: 100px;
   clear: both;
@@ -101,16 +163,21 @@ img {
     font-size: 15px;
     color: #468EE1;
     font-size: 12px;
+    text-align: center;
+    padding-top: 35px;
   }
 }
 
 footer {
-  width: 100%;
+  width: 900px;
+  margin: auto;
+  padding: 40px 20px;
   height: 60px;
   clear: both;
 
   ul {
     float: left;
+    padding-left: 0;
   }
 
   li {
@@ -122,8 +189,10 @@ footer {
   }
 
   div {
+    margin: 16px 16px;
     float: right;
     font-size: 12px;
+    padding-top: 2px;
   }
 
 

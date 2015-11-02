@@ -519,7 +519,17 @@ var images = _react2['default'].createClass({
       _react2['default'].createElement(
         'header',
         null,
-        'Fauxstagram'
+        _react2['default'].createElement(
+          'h4',
+          null,
+          'Fauxstagram'
+        ),
+        _react2['default'].createElement('input', { placeholder: 'Search', type: 'text' }),
+        _react2['default'].createElement(
+          'h5',
+          null,
+          'Log out'
+        )
       ),
       _react2['default'].createElement(
         'div',
@@ -544,7 +554,7 @@ var images = _react2['default'].createClass({
             _react2['default'].createElement(
               'h3',
               null,
-              'Description'
+              'puppy momma . tomboy . vintage hunter daydreamsonvinyl.tumblr.com'
             )
           ),
           _react2['default'].createElement(
@@ -553,17 +563,17 @@ var images = _react2['default'].createClass({
             _react2['default'].createElement(
               'h4',
               null,
-              'posts'
+              '339 posts'
             ),
             _react2['default'].createElement(
               'h4',
               null,
-              'follower'
+              '300 followers'
             ),
             _react2['default'].createElement(
               'h4',
               null,
-              'following'
+              '134 following'
             )
           )
         )

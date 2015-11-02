@@ -23,7 +23,10 @@ let images = React.createClass( {
     return (
 
       <div className="images-view">
-        <header>Fauxstagram
+        <header>
+          <h4>Fauxstagram</h4>
+          <input placeholder="Search" type="text"/>
+          <h5>Log out</h5>
         </header>
 
         <div className="profile">
@@ -35,12 +38,12 @@ let images = React.createClass( {
               <a></a>
             </div>
             <div className="profile-desc">
-              <h3>Description</h3>
+              <h3>puppy momma . tomboy . vintage hunter daydreamsonvinyl.tumblr.com</h3>
             </div>
             <div className="profile-follow">
-              <h4>posts</h4>
-              <h4>follower</h4>
-              <h4>following</h4>
+              <h4>339 posts</h4>
+              <h4>300 followers</h4>
+              <h4>134 following</h4>
             </div>
           </div>
         </div>
