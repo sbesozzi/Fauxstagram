@@ -215,6 +215,7 @@ exports['default'] = _backbone2['default'].Router.extend({
     console.log('show image page');
     var img = this.images.get(id);
 
+    // If fetched from home page render
     if (img) {
       this.render(_react2['default'].createElement(_viewsImage2['default'], {
         onBackSelect: function () {
@@ -227,25 +228,27 @@ exports['default'] = _backbone2['default'].Router.extend({
           return _this2.goto('edit/' + id);
         },
         data: img.toJSON() }));
+
+      // Else manually fetch image id and render
     } else {
-      img = this.images.add({ objectId: id });
-      img.fetch().then(function () {
-        _this2.render(_react2['default'].createElement(_viewsImage2['default'], {
-          onBackSelect: function () {
-            return _this2.goto('');
-          },
-          onAddSelect: function (id) {
-            return _this2.goto('add');
-          },
-          onEditSelect: function (id) {
-            return _this2.goto('edit/' + id);
-          },
-          data: img.toJSON() }));
-      });
-    }
+        img = this.images.add({ objectId: id });
+        img.fetch().then(function () {
+          _this2.render(_react2['default'].createElement(_viewsImage2['default'], {
+            onBackSelect: function () {
+              return _this2.goto('');
+            },
+            onAddSelect: function (id) {
+              return _this2.goto('add');
+            },
+            onEditSelect: function (id) {
+              return _this2.goto('edit/' + id);
+            },
+            data: img.toJSON() }));
+        });
+      }
   },
 
-  showEdit: function showEdit(id) {
+  showEdit: function showEdit(objectId) {
     var _this3 = this;
 
     console.log('show edit page');
@@ -388,11 +391,17 @@ var _react2 = _interopRequireDefault(_react);
 var edit = _react2["default"].createClass({
   displayName: "edit",
 
+  // getInitialState() {
+  //   // Photo : ,
+  //   // Description :
+  //   // return
+  // },
+
   addBackHandler: function addBackHandler() {
     this.props.onBackSelect();
   },
 
-  editHandler: function editHandler() {
+  saveHandler: function saveHandler() {
     this.props.onEditSelect();
   },
 
@@ -424,7 +433,7 @@ var edit = _react2["default"].createClass({
         _react2["default"].createElement(
           "button",
           { onClick: function () {
-              return _this.editHandler();
+              return _this.saveHandler();
             } },
           "Save"
         ),
@@ -465,8 +474,8 @@ var image = _react2["default"].createClass({
     this.props.onSelect(this.props.id);
   },
 
-  editHandler: function editHandler() {
-    this.props.onEditSelect();
+  editHandler: function editHandler(id) {
+    this.props.onEditSelect(id);
   },
 
   addHandler: function addHandler() {
@@ -490,8 +499,9 @@ var image = _react2["default"].createClass({
         null,
         _react2["default"].createElement(
           "button",
-          { onClick: function () {
-              return _this.editHandler();
+          { key: this.props.data.objectId,
+            onClick: function () {
+              return _this.editHandler(_this.props.data.objectId);
             } },
           "Edit"
         ),

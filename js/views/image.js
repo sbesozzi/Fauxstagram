@@ -9,8 +9,8 @@ let image = React.createClass({
 
   },
 
-  editHandler() {
-    this.props.onEditSelect();
+  editHandler(id) {
+    this.props.onEditSelect(id);
 
   },
 
@@ -33,7 +33,11 @@ let image = React.createClass({
         <image src={this.props.data.Photo}/>
         
         <div>
-          <button onClick={() => this.editHandler()}>Edit</button>
+
+          <button key={this.props.data.objectId} 
+            onClick={() => this.editHandler(this.props.data.objectId)}>Edit</button>
+
+
           <button onClick={() => this.addHandler()}>Add</button>
           <button onClick={() => this.backHandler()}>Back</button>
         </div>

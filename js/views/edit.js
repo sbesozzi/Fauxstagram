@@ -2,11 +2,17 @@ import React from 'react';
 
 let edit = React.createClass({
 
+  // getInitialState() {
+  //   // Photo : ,
+  //   // Description : 
+  //   // return
+  // },
+
   addBackHandler() {
     this.props.onBackSelect();
   },
 
-  editHandler() {
+  saveHandler() {
     this.props.onEditSelect();
   },
 
@@ -23,7 +29,7 @@ let edit = React.createClass({
 
         </form>
         <div>
-          <button onClick={() => this.editHandler()}>Save</button>
+          <button onClick={() => this.saveHandler()}>Save</button>
           <button onClick={() => this.addBackHandler()}>Back</button>
         </div>
 

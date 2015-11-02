@@ -53,7 +53,7 @@ export default Backbone.Router.extend( {
     this.images.fetch().then(() => {
       this.render(
         <ImagesComponent 
-          onImageSelect={(id) => this.goto('image/' + id)}
+          onImageSelect={id => this.goto('image/' + id)}
           data={ this.images.toJSON()}/>
       );
     });
@@ -64,24 +64,26 @@ export default Backbone.Router.extend( {
   showImage(id) {
     console.log('show image page');
     let img = this.images.get(id);
-
+    
+    // If fetched from home page render
     if (img) {
       this.render(
         <ImageComponent
           onBackSelect={() => this.goto('')}
-          onAddSelect={(id) => this.goto('add')}
-          onEditSelect={(id) => this.goto('edit/' + id)}
+          onAddSelect={id => this.goto('add')}
+          onEditSelect={id => this.goto('edit/' + id)}
           data={img.toJSON()}/>
       );
-      
+    
+    // Else manually fetch image id and render  
     } else {
       img = this.images.add({objectId: id});
       img.fetch().then(() => {
         this.render(
           <ImageComponent
             onBackSelect={() => this.goto('')}
-            onAddSelect={(id) => this.goto('add')}
-            onEditSelect={(id) => this.goto('edit/' + id)}
+            onAddSelect={id => this.goto('add')}
+            onEditSelect={id => this.goto('edit/' + id)}
             data={img.toJSON()}/>
         );
       });
@@ -90,7 +92,7 @@ export default Backbone.Router.extend( {
   },
 
  
-  showEdit(id) {
+  showEdit(objectId) {
     console.log('show edit page');
 
     this.render( 
