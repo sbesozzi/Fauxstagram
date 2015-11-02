@@ -175,7 +175,7 @@ exports['default'] = _backbone2['default'].Router.extend({
     "images": "showImages",
     "image/:id": "showImage",
     "add": "showAdd",
-    "edit": "showEdit"
+    "edit/id": "showEdit"
 
   },
 
@@ -200,7 +200,6 @@ exports['default'] = _backbone2['default'].Router.extend({
     var _this = this;
 
     console.log('show images page');
-
     this.images.fetch().then(function () {
       _this.render(_react2['default'].createElement(_viewsImages2['default'], {
         onImageSelect: function (id) {
@@ -219,7 +218,7 @@ exports['default'] = _backbone2['default'].Router.extend({
     if (img) {
       this.render(_react2['default'].createElement(_viewsImage2['default'], {
         onBackClick: function () {
-          return _this2.goto('image');
+          return _this2.goto('');
         },
         onEditClick: function (id) {
           return _this2.goto('edit/' + id);
@@ -230,7 +229,7 @@ exports['default'] = _backbone2['default'].Router.extend({
       img.fetch().then(function () {
         _this2.render(_react2['default'].createElement(_viewsImage2['default'], {
           onBackClick: function () {
-            return _this2.goto('image');
+            return _this2.goto('');
           },
           onEditClick: function (id) {
             return _this2.goto('edit/' + id);
@@ -240,19 +239,44 @@ exports['default'] = _backbone2['default'].Router.extend({
     }
   },
 
-  showEdit: function showEdit() {
+  showEdit: function showEdit(id) {
+    var _this3 = this;
+
     console.log('show edit page');
 
-    this.render(_react2['default'].createElement(_viewsEdit2['default'], null));
+    this.render(_react2['default'].createElement(_viewsEdit2['default'], {
+      onBackSelect: function () {
+        return _this3.goto('');
+      },
+      // On
+      onEditSelect: function () {
+        var newEdit = new _image_modelJs2['default']({
+          Photo: newPhoto
+        });
+        newEdit.save();
+        _this3.goto('');
+      } }));
   },
 
   showAdd: function showAdd() {
+    var _this4 = this;
+
     console.log('show add page');
 
-    this.render(_react2['default'].createElement(_viewsAdd2['default'], null));
-  },
+    this.render(_react2['default'].createElement(_viewsAdd2['default'], {
+      onBackSelect: function () {
+        return _this4.goto('');
+      },
+      // On upload create new image model and save
+      onUploadSelect: function () {
 
-  // }
+        var newUpload = new _image_modelJs2['default']({
+          Photo: newPhoto
+        });
+        newUpload.save();
+        _this4.goto('');
+      } }));
+  },
 
   // Spinner //
   showSpinner: function showSpinner() {
@@ -279,50 +303,127 @@ module.exports = exports['default'];
 },{"./image_model.js":2,"./images_collection.js":3,"./views/add":6,"./views/edit":7,"./views/image":8,"./views/images":9,"./views/spinner":10,"backbone":11,"jquery":13,"react":170,"react-dom":14}],6:[function(require,module,exports){
 "use strict";
 
-// import React from 'react';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-// let add = React.createClass({
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-//   render() {
+var _react = require('react');
 
-//     return  (
-//       <div className="add">
-//         <h3>Add</h3>
-//         <form onSubmit={this.submitHandler}/>
-//         <label onInput={this.updateMessage} type="file"/>
-//         <button onClick={this.addHandler}>Add</button>
-//       </div>
-//     );
-//   }
+var _react2 = _interopRequireDefault(_react);
 
-// });
+var add = _react2["default"].createClass({
+  displayName: "add",
 
-// export default add;
+  addBackHandler: function addBackHandler() {
+    this.props.onBackSelect();
+  },
 
-},{}],7:[function(require,module,exports){
+  addHandler: function addHandler() {
+    this.props.onUploadSelect();
+  },
+
+  render: function render() {
+    var _this = this;
+
+    return _react2["default"].createElement(
+      "div",
+      { className: "add" },
+      _react2["default"].createElement(
+        "h3",
+        null,
+        "Add"
+      ),
+      _react2["default"].createElement(
+        "form",
+        { onSubmit: this.submitHandler },
+        _react2["default"].createElement("input", { type: "file", text: "Choose Photo", placeholder: "Image URL:" })
+      ),
+      _react2["default"].createElement(
+        "button",
+        { onClick: function () {
+            return _this.addHandler();
+          } },
+        "Add"
+      ),
+      _react2["default"].createElement(
+        "button",
+        { onClick: function () {
+            return _this.addBackHandler();
+          } },
+        "Back"
+      )
+    );
+  }
+
+});
+
+exports["default"] = add;
+module.exports = exports["default"];
+
+},{"react":170}],7:[function(require,module,exports){
 "use strict";
 
-// import React from 'react';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-// let edit = React.createClass({
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-//   render() {
+var _react = require('react');
 
-//     return (
-//       <div className="edit">
-//         <h3>Edit</h3>
-//         <form onSubmit={this.submitHandler}>
-//           <label onChange={this.updateMessage} type="file">/>
-//         <button onClick={this.addHandler}>Add</button>
-//       </div>
+var _react2 = _interopRequireDefault(_react);
 
-//     );
-//   }
-// });
+var edit = _react2["default"].createClass({
+  displayName: "edit",
 
-// export default edit;
+  addBackHandler: function addBackHandler() {
+    this.props.onBackSelect();
+  },
 
-},{}],8:[function(require,module,exports){
+  editHandler: function editHandler() {
+    this.props.onEditSelect();
+  },
+
+  render: function render() {
+    var _this = this;
+
+    return _react2["default"].createElement(
+      "div",
+      { className: "edit" },
+      _react2["default"].createElement(
+        "h3",
+        null,
+        "Edit"
+      ),
+      _react2["default"].createElement(
+        "form",
+        { onSubmit: this.submitHandler },
+        _react2["default"].createElement("label", { onChange: this.updateMessage, type: "file" })
+      ),
+      _react2["default"].createElement(
+        "button",
+        { onClick: function () {
+            return _this.editHandler();
+          } },
+        "Edit"
+      ),
+      _react2["default"].createElement(
+        "button",
+        { onClick: function () {
+            return _this.addBackHandler();
+          } },
+        "Back"
+      )
+    );
+  }
+});
+
+exports["default"] = edit;
+module.exports = exports["default"];
+
+},{"react":170}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -393,7 +494,6 @@ var _image2 = _interopRequireDefault(_image);
 var images = _react2['default'].createClass({
   displayName: 'images',
 
-  // getInitialState() {
   selectHandler: function selectHandler(id) {
     this.props.onImageSelect(id);
   },
@@ -416,7 +516,11 @@ var images = _react2['default'].createClass({
     return _react2['default'].createElement(
       'div',
       { className: 'images-view' },
-      _react2['default'].createElement('header', null),
+      _react2['default'].createElement(
+        'header',
+        null,
+        'Fauxstagram'
+      ),
       _react2['default'].createElement(
         'div',
         { className: 'profile' },
@@ -469,7 +573,73 @@ var images = _react2['default'].createClass({
         { className: 'image-list' },
         this.props.data.map(this.processImages)
       ),
-      _react2['default'].createElement('footer', null)
+      _react2['default'].createElement(
+        'div',
+        { className: 'load-more' },
+        _react2['default'].createElement(
+          'h4',
+          null,
+          'LOAD MORE'
+        )
+      ),
+      _react2['default'].createElement(
+        'footer',
+        null,
+        _react2['default'].createElement(
+          'ul',
+          null,
+          _react2['default'].createElement(
+            'li',
+            null,
+            'ABOUT US'
+          ),
+          _react2['default'].createElement(
+            'li',
+            null,
+            'SUPPORT'
+          ),
+          _react2['default'].createElement(
+            'li',
+            null,
+            'BLOG'
+          ),
+          _react2['default'].createElement(
+            'li',
+            null,
+            'PRESS'
+          ),
+          _react2['default'].createElement(
+            'li',
+            null,
+            'API'
+          ),
+          _react2['default'].createElement(
+            'li',
+            null,
+            'JOBS'
+          ),
+          _react2['default'].createElement(
+            'li',
+            null,
+            'PRIVACY'
+          ),
+          _react2['default'].createElement(
+            'li',
+            null,
+            'TERMS'
+          ),
+          _react2['default'].createElement(
+            'li',
+            null,
+            'LANGUAGE'
+          )
+        ),
+        _react2['default'].createElement(
+          'div',
+          null,
+          '2015 Sarah Besozzi'
+        )
+      )
     );
   }
 

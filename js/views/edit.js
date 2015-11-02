@@ -1,19 +1,30 @@
-// import React from 'react';
+import React from 'react';
 
-// let edit = React.createClass({
+let edit = React.createClass({
 
-//   render() {
+  addBackHandler() {
+    this.props.onBackSelect();
+  },
 
-//     return (
-//       <div className="edit">
-//         <h3>Edit</h3>
-//         <form onSubmit={this.submitHandler}>
-//           <label onChange={this.updateMessage} type="file">/>
-//         <button onClick={this.addHandler}>Add</button>
-//       </div>
+  editHandler() {
+    this.props.onEditSelect();
+  },
 
-//     );
-//   }
-// });
+  render() {
 
-// export default edit;
+    return (
+      <div className="edit">
+        <h3>Edit</h3>
+        <form onSubmit={this.submitHandler}>
+          <label onChange={this.updateMessage} type="file"/>
+        </form>
+        <button onClick={() => this.editHandler()}>Edit</button>
+        <button onClick={() => this.addBackHandler()}>Back</button>
+
+      </div>
+
+    );
+  }
+});
+
+export default edit;

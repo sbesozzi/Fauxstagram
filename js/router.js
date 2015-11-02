@@ -22,7 +22,7 @@ export default Backbone.Router.extend( {
     "images"    : "showImages",
     "image/:id" : "showImage", 
     "add"       : "showAdd",
-    "edit"      : "showEdit"
+    "edit/id"   : "showEdit"
 
   },
 
@@ -50,7 +50,6 @@ export default Backbone.Router.extend( {
   // Home View //
   showImages() {
     console.log('show images page');
-
     this.images.fetch().then(() => {
       this.render(
         <ImagesComponent 
@@ -62,7 +61,6 @@ export default Backbone.Router.extend( {
   },
 
 
-
   showImage(id) {
     console.log('show image page');
     let img = this.images.get(id);
@@ -70,7 +68,7 @@ export default Backbone.Router.extend( {
     if (img) {
       this.render(
         <ImageComponent
-          onBackClick={() => this.goto('image')}
+          onBackClick={() => this.goto('')}
           onEditClick={(id) => this.goto('edit/' + id)}
           data={img.toJSON()}/>
       );
@@ -80,7 +78,7 @@ export default Backbone.Router.extend( {
       img.fetch().then(() => {
         this.render(
           <ImageComponent
-            onBackClick={() => this.goto('image')}
+            onBackClick={() => this.goto('')}
             onEditClick={(id) => this.goto('edit/' + id)}
             data={img.toJSON()}/>
         );
@@ -90,29 +88,48 @@ export default Backbone.Router.extend( {
   },
 
  
-
-
-
-  showEdit() {
+  showEdit(id) {
     console.log('show edit page');
 
     this.render( 
-      <EditComponent/>
+      <EditComponent
+      onBackSelect={() => this.goto('')}
+      // On
+      onEditSelect={() => {
+        let newEdit = new ImageModel ({
+          Photo: newPhoto
+        });
+        newEdit.save();
+        this.goto('');
+      }
+    }/>
+
     );
 
-  },
-
+  }, 
+      
   showAdd() {
     console.log('show add page');
 
     this.render(
-      <AddComponent/>
+      <AddComponent
+      onBackSelect={() => this.goto('')}
+      // On upload create new image model and save
+      onUploadSelect={() => {
+      
+        let newUpload = new ImageModel ({
+          Photo: newPhoto
+        });
+        newUpload.save();
+        this.goto('');
+      }
+      }/>
 
     );
 
   },
 
-  // }
+
 
   // Spinner //
   showSpinner() {

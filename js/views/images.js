@@ -4,7 +4,6 @@ import image from './image';
 
 let images = React.createClass( {
 
-  // getInitialState() {
   selectHandler(id) {
     this.props.onImageSelect(id);
   },
@@ -24,7 +23,8 @@ let images = React.createClass( {
     return (
 
       <div className="images-view">
-        <header></header>
+        <header>Fauxstagram
+        </header>
 
         <div className="profile">
           <div className="profile-image">
@@ -47,9 +47,23 @@ let images = React.createClass( {
         <div className="image-list">
           {this.props.data.map(this.processImages) }
         </div>
-        
+        <div className="load-more"><h4>LOAD MORE</h4>
+        </div>
 
-        <footer></footer>
+        <footer>
+          <ul>
+            <li>ABOUT US</li>
+            <li>SUPPORT</li>
+            <li>BLOG</li>
+            <li>PRESS</li>
+            <li>API</li>
+            <li>JOBS</li>
+            <li>PRIVACY</li>
+            <li>TERMS</li>
+            <li>LANGUAGE</li>
+          </ul>
+          <div>2015 Sarah Besozzi</div>
+        </footer>
       </div>
     );
   }
@@ -57,4 +71,3 @@ let images = React.createClass( {
 });
 
 export default images;
-
