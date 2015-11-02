@@ -175,7 +175,7 @@ exports['default'] = _backbone2['default'].Router.extend({
     "images": "showImages",
     "image/:id": "showImage",
     "add": "showAdd",
-    "edit/id": "showEdit"
+    "edit/:id": "showEdit"
 
   },
 
@@ -217,10 +217,10 @@ exports['default'] = _backbone2['default'].Router.extend({
 
     if (img) {
       this.render(_react2['default'].createElement(_viewsImage2['default'], {
-        onBackClick: function () {
+        onBackSelect: function () {
           return _this2.goto('');
         },
-        onEditClick: function (id) {
+        onEditSelect: function (id) {
           return _this2.goto('edit/' + id);
         },
         data: img.toJSON() }));
@@ -228,10 +228,10 @@ exports['default'] = _backbone2['default'].Router.extend({
       img = this.images.add({ objectId: id });
       img.fetch().then(function () {
         _this2.render(_react2['default'].createElement(_viewsImage2['default'], {
-          onBackClick: function () {
+          onBackSelect: function () {
             return _this2.goto('');
           },
-          onEditClick: function (id) {
+          onEditSelect: function (id) {
             return _this2.goto('edit/' + id);
           },
           data: img.toJSON() }));
@@ -246,9 +246,8 @@ exports['default'] = _backbone2['default'].Router.extend({
 
     this.render(_react2['default'].createElement(_viewsEdit2['default'], {
       onBackSelect: function () {
-        return _this3.goto('');
+        return _this3.goto('image/' + id);
       },
-      // On
       onEditSelect: function () {
         var newEdit = new _image_modelJs2['default']({
           Photo: newPhoto
@@ -331,28 +330,33 @@ var add = _react2["default"].createClass({
       "div",
       { className: "add" },
       _react2["default"].createElement(
-        "h3",
-        null,
-        "Add"
-      ),
-      _react2["default"].createElement(
         "form",
         { onSubmit: this.submitHandler },
-        _react2["default"].createElement("input", { type: "file", text: "Choose Photo", placeholder: "Image URL:" })
+        _react2["default"].createElement("input", { type: "file", text: "Upload Photo", placeholder: "Image URL:" }),
+        _react2["default"].createElement(
+          "label",
+          null,
+          "Description: ",
+          _react2["default"].createElement("input", { type: "text" })
+        )
       ),
       _react2["default"].createElement(
-        "button",
-        { onClick: function () {
-            return _this.addHandler();
-          } },
-        "Add"
-      ),
-      _react2["default"].createElement(
-        "button",
-        { onClick: function () {
-            return _this.addBackHandler();
-          } },
-        "Back"
+        "div",
+        null,
+        _react2["default"].createElement(
+          "button",
+          { onClick: function () {
+              return _this.addHandler();
+            } },
+          "Save"
+        ),
+        _react2["default"].createElement(
+          "button",
+          { onClick: function () {
+              return _this.addBackHandler();
+            } },
+          "Back"
+        )
       )
     );
   }
@@ -393,28 +397,38 @@ var edit = _react2["default"].createClass({
       "div",
       { className: "edit" },
       _react2["default"].createElement(
-        "h3",
-        null,
-        "Edit"
-      ),
-      _react2["default"].createElement(
         "form",
         { onSubmit: this.submitHandler },
-        _react2["default"].createElement("label", { onChange: this.updateMessage, type: "file" })
+        _react2["default"].createElement(
+          "label",
+          null,
+          "Edit URL: ",
+          _react2["default"].createElement("input", { type: "text" })
+        ),
+        _react2["default"].createElement(
+          "label",
+          null,
+          "Edit Description: ",
+          _react2["default"].createElement("input", { type: "text" })
+        )
       ),
       _react2["default"].createElement(
-        "button",
-        { onClick: function () {
-            return _this.editHandler();
-          } },
-        "Edit"
-      ),
-      _react2["default"].createElement(
-        "button",
-        { onClick: function () {
-            return _this.addBackHandler();
-          } },
-        "Back"
+        "div",
+        null,
+        _react2["default"].createElement(
+          "button",
+          { onClick: function () {
+              return _this.editHandler();
+            } },
+          "Save"
+        ),
+        _react2["default"].createElement(
+          "button",
+          { onClick: function () {
+              return _this.addBackHandler();
+            } },
+          "Back"
+        )
       )
     );
   }
@@ -445,7 +459,17 @@ var image = _react2["default"].createClass({
     this.props.onSelect(this.props.id);
   },
 
+  editHandler: function editHandler() {
+    this.props.onEditSelect();
+  },
+
+  backHandler: function backHandler() {
+    this.props.onBackSelect();
+  },
+
   render: function render(data) {
+    var _this = this;
+
     return _react2["default"].createElement(
       "div",
       { className: "image", key: this.props.data.objectId,
@@ -453,20 +477,19 @@ var image = _react2["default"].createClass({
       _react2["default"].createElement("image", { src: this.props.data.Photo }),
       _react2["default"].createElement(
         "div",
-        { className: "about" },
-        this.props.data.About
-      ),
-      _react2["default"].createElement(
-        "div",
-        { className: "image-button" },
+        null,
         _react2["default"].createElement(
           "button",
-          null,
+          { onClick: function () {
+              return _this.editHandler();
+            } },
           "Edit"
         ),
         _react2["default"].createElement(
           "button",
-          null,
+          { onClick: function () {
+              return _this.backHandler();
+            } },
           "Back"
         )
       )

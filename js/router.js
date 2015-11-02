@@ -22,7 +22,7 @@ export default Backbone.Router.extend( {
     "images"    : "showImages",
     "image/:id" : "showImage", 
     "add"       : "showAdd",
-    "edit/id"   : "showEdit"
+    "edit/:id"   : "showEdit"
 
   },
 
@@ -68,8 +68,8 @@ export default Backbone.Router.extend( {
     if (img) {
       this.render(
         <ImageComponent
-          onBackClick={() => this.goto('')}
-          onEditClick={(id) => this.goto('edit/' + id)}
+          onBackSelect={() => this.goto('')}
+          onEditSelect={(id) => this.goto('edit/' + id)}
           data={img.toJSON()}/>
       );
       
@@ -78,8 +78,8 @@ export default Backbone.Router.extend( {
       img.fetch().then(() => {
         this.render(
           <ImageComponent
-            onBackClick={() => this.goto('')}
-            onEditClick={(id) => this.goto('edit/' + id)}
+            onBackSelect={() => this.goto('')}
+            onEditSelect={(id) => this.goto('edit/' + id)}
             data={img.toJSON()}/>
         );
       });
@@ -93,8 +93,7 @@ export default Backbone.Router.extend( {
 
     this.render( 
       <EditComponent
-      onBackSelect={() => this.goto('')}
-      // On
+      onBackSelect={() => this.goto('image/' + id)}
       onEditSelect={() => {
         let newEdit = new ImageModel ({
           Photo: newPhoto

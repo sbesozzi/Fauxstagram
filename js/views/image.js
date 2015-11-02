@@ -9,17 +9,27 @@ let image = React.createClass({
 
   },
 
+  editHandler() {
+    this.props.onEditSelect();
+
+  },
+
+  backHandler() {
+    this.props.onBackSelect();
+    
+  },
+
+
   render(data) {
     return (
       
       <div className="image" key={this.props.data.objectId} 
           onSelect={this.clickHandler}>
         <image src={this.props.data.Photo}/>
-        <div className="about">{this.props.data.About}
-        </div>
-        <div className="image-button">
-          <button>Edit</button>
-          <button>Back</button>
+        
+        <div>
+          <button onClick={() => this.editHandler()}>Edit</button>
+          <button onClick={() => this.backHandler()}>Back</button>
         </div>
       </div>
     );

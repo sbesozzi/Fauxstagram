@@ -14,12 +14,18 @@ let edit = React.createClass({
 
     return (
       <div className="edit">
-        <h3>Edit</h3>
         <form onSubmit={this.submitHandler}>
-          <label onChange={this.updateMessage} type="file"/>
+         <label>Edit URL: <input type="text"/>
+         </label>
+         <label>Edit Description: <input type="text"/>
+         </label>
+
+
         </form>
-        <button onClick={() => this.editHandler()}>Edit</button>
-        <button onClick={() => this.addBackHandler()}>Back</button>
+        <div>
+          <button onClick={() => this.editHandler()}>Save</button>
+          <button onClick={() => this.addBackHandler()}>Back</button>
+        </div>
 
       </div>
 

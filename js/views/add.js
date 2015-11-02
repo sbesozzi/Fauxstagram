@@ -14,12 +14,15 @@ let add = React.createClass({
 
     return  (
       <div className="add">
-        <h3>Add</h3>
         <form onSubmit={this.submitHandler}>
-          <input type="file" text="Choose Photo" placeholder="Image URL:"></input>
+          <input type="file" text="Upload Photo" placeholder="Image URL:"></input>
+          <label>Description: <input type="text"/></label>
         </form>
-        <button onClick={() => this.addHandler()}>Add</button>
+        <div>
+        <button onClick={() => this.addHandler()}>
+          Save</button>
         <button onClick={() => this.addBackHandler()}>Back</button>
+        </div>
 
       </div>
     );
