@@ -31,6 +31,8 @@ let image = React.createClass({
       <div className="image" key={this.props.data.objectId} 
           onSelect={this.clickHandler}>
         <image src={this.props.data.Photo}/>
+        <div className="image-about"> {this.props.data.About}
+        </div>
         
         <div>
 
