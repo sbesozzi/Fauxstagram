@@ -94,22 +94,28 @@ export default Backbone.Router.extend( {
  
   showEdit(objectId) {
     console.log('show edit page');
+    let img = this.images.get(objectId);
+
 
     this.render( 
       <EditComponent
-      onBackSelect={() => this.goto('')}
-      onEditSelect={() => {
-        let newEdit = new ImageModel ({
-          Photo: newPhoto
-        });
-        newEdit.save();
-        this.goto('');
-      }
-    }/>
+        data={img.toJSON()}
 
+        onBackSelect={() => this.goto('')}
+        onSaveSelect={(photo, about) => this.saveForm(photo, about, objectId)}/>
     );
 
   }, 
+
+  saveForm(photo, about, objectId) {
+    this.images.get(objectId).save({
+      Photo: photo,
+      About: about
+    }).then(() => {
+      this.goto('');
+    });
+
+  },
       
   showAdd() {
     console.log('show add page');
@@ -118,14 +124,18 @@ export default Backbone.Router.extend( {
       <AddComponent
       onBackSelect={() => this.goto('')}
       // On upload create new image model and save
-      onUploadSelect={() => {
+      onUploadSelect={(photo, about) => {
       
         let newUpload = new ImageModel ({
-          Photo: newPhoto
+          Photo: photo,
+          About: about
         });
-        newUpload.save();
-        this.goto('');
+
+        newUpload.save().then(() => {
+          this.goto('');
+        });
       }
+        
       }/>
 
     );

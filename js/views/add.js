@@ -2,26 +2,42 @@ import React from 'react';
 
 let add = React.createClass({
 
-  addBackHandler() {
+  backHandler() {
     this.props.onBackSelect();
   },
 
-  addHandler() {
-    this.props.onUploadSelect();
+  submitHandler(event) {
+    event.preventDefault();
+    this.props.onUploadSelect(this.state.Photo, this.state.About);
+  
   },
+
+  updatePhoto(event) {
+    let newPhoto = event.currentTarget.value;
+    this.setState({
+      Photo: newPhoto
+    });
+  },
+
+  updateAbout(event) {
+    let newAbout = event.currentTarget.value;
+    this.setState({
+      About: newAbout
+    });
+  },
+
 
   render() {
 
     return  (
       <div className="add">
         <form onSubmit={this.submitHandler}>
-          <input type="file" text="Upload Photo" placeholder="Image URL:"></input>
-          <label>Description: <input type="text"/></label>
+          <label><input onChange={this.updatePhoto} type="file" text="Upload Photo"></input></label>
+          <label>Description: <input onChange={this.updatePhoto} type="text"/></label>
         </form>
         <div>
-        <button onClick={() => this.addHandler()}>
-          Save</button>
-        <button onClick={() => this.addBackHandler()}>Back</button>
+        <button onClick={this.submitHandler}>Save</button>
+        <button onClick={this.backHandler}>Back</button>
         </div>
 
       </div>

@@ -2,35 +2,56 @@ import React from 'react';
 
 let edit = React.createClass({
 
-  // getInitialState() {
-  //   // Photo : ,
-  //   // Description : 
-  //   // return
+  getInitialState() {
+    return {
+      Photo: this.props.data.Photo,
+      About: this.props.data.About
+    };
+  },
+
+
+  submitHandler(event) {
+    event.preventDefault();
+    this.props.onSaveSelect(this.state.Photo, this.state.About);
+  },
+
+  updatePhoto(event) {
+    let newPhoto = event.currentTarget.value;
+    this.setState({
+      Photo: newPhoto
+    });
+  },
+
+  updateAbout(event) {
+    let newAbout = event.currentTarget.value;
+    this.setState({
+      About: newAbout
+    });
+  },
+
+  
+  // saveHandler() {
+  //   this.props.onEditSelect();
   // },
 
-  addBackHandler() {
+  backHandler() {
     this.props.onBackSelect();
   },
 
-  saveHandler() {
-    this.props.onEditSelect();
-  },
 
   render() {
 
     return (
       <div className="edit">
         <form onSubmit={this.submitHandler}>
-         <label>Edit URL: <input type="text"/>
+         <label><input onChange={this.updatePhoto} type="file" value ={this.state.Photo}></input></label>
+         <label>Edit About: <input onChange={this.updateAbout} type="text" placeholder="Edit About" value={this.state.About}/>
          </label>
-         <label>Edit Description: <input type="text"/>
-         </label>
-
-
         </form>
+
         <div>
-          <button onClick={() => this.saveHandler()}>Save</button>
-          <button onClick={() => this.addBackHandler()}>Back</button>
+          <button onClick={this.submitHandler}>Save</button>
+          <button onClick={this.backHandler}>Back</button>
         </div>
 
       </div>

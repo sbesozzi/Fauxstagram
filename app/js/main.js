@@ -252,37 +252,50 @@ exports['default'] = _backbone2['default'].Router.extend({
     var _this3 = this;
 
     console.log('show edit page');
+    var img = this.images.get(objectId);
 
     this.render(_react2['default'].createElement(_viewsEdit2['default'], {
+      data: img.toJSON(),
+
       onBackSelect: function () {
         return _this3.goto('');
       },
-      onEditSelect: function () {
-        var newEdit = new _image_modelJs2['default']({
-          Photo: newPhoto
-        });
-        newEdit.save();
-        _this3.goto('');
+      onSaveSelect: function (photo, about) {
+        return _this3.saveForm(photo, about, objectId);
       } }));
   },
 
-  showAdd: function showAdd() {
+  saveForm: function saveForm(photo, about, objectId) {
     var _this4 = this;
+
+    this.images.get(objectId).save({
+      Photo: photo,
+      About: about
+    }).then(function () {
+      _this4.goto('');
+    });
+  },
+
+  showAdd: function showAdd() {
+    var _this5 = this;
 
     console.log('show add page');
 
     this.render(_react2['default'].createElement(_viewsAdd2['default'], {
       onBackSelect: function () {
-        return _this4.goto('');
+        return _this5.goto('');
       },
       // On upload create new image model and save
-      onUploadSelect: function () {
+      onUploadSelect: function (photo, about) {
 
         var newUpload = new _image_modelJs2['default']({
-          Photo: newPhoto
+          Photo: photo,
+          About: about
         });
-        newUpload.save();
-        _this4.goto('');
+
+        newUpload.save().then(function () {
+          _this5.goto('');
+        });
       } }));
   },
 
@@ -324,16 +337,30 @@ var _react2 = _interopRequireDefault(_react);
 var add = _react2["default"].createClass({
   displayName: "add",
 
-  addBackHandler: function addBackHandler() {
+  backHandler: function backHandler() {
     this.props.onBackSelect();
   },
 
-  addHandler: function addHandler() {
-    this.props.onUploadSelect();
+  submitHandler: function submitHandler(event) {
+    event.preventDefault();
+    this.props.onUploadSelect(this.state.Photo, this.state.About);
+  },
+
+  updatePhoto: function updatePhoto(event) {
+    var newPhoto = event.currentTarget.value;
+    this.setState({
+      Photo: newPhoto
+    });
+  },
+
+  updateAbout: function updateAbout(event) {
+    var newAbout = event.currentTarget.value;
+    this.setState({
+      About: newAbout
+    });
   },
 
   render: function render() {
-    var _this = this;
 
     return _react2["default"].createElement(
       "div",
@@ -341,12 +368,16 @@ var add = _react2["default"].createClass({
       _react2["default"].createElement(
         "form",
         { onSubmit: this.submitHandler },
-        _react2["default"].createElement("input", { type: "file", text: "Upload Photo", placeholder: "Image URL:" }),
+        _react2["default"].createElement(
+          "label",
+          null,
+          _react2["default"].createElement("input", { onChange: this.updatePhoto, type: "file", text: "Upload Photo" })
+        ),
         _react2["default"].createElement(
           "label",
           null,
           "Description: ",
-          _react2["default"].createElement("input", { type: "text" })
+          _react2["default"].createElement("input", { onChange: this.updatePhoto, type: "text" })
         )
       ),
       _react2["default"].createElement(
@@ -354,16 +385,12 @@ var add = _react2["default"].createClass({
         null,
         _react2["default"].createElement(
           "button",
-          { onClick: function () {
-              return _this.addHandler();
-            } },
+          { onClick: this.submitHandler },
           "Save"
         ),
         _react2["default"].createElement(
           "button",
-          { onClick: function () {
-              return _this.addBackHandler();
-            } },
+          { onClick: this.backHandler },
           "Back"
         )
       )
@@ -391,22 +418,41 @@ var _react2 = _interopRequireDefault(_react);
 var edit = _react2["default"].createClass({
   displayName: "edit",
 
-  // getInitialState() {
-  //   // Photo : ,
-  //   // Description :
-  //   // return
+  getInitialState: function getInitialState() {
+    return {
+      Photo: this.props.data.Photo,
+      About: this.props.data.About
+    };
+  },
+
+  submitHandler: function submitHandler(event) {
+    event.preventDefault();
+    this.props.onSaveSelect(this.state.Photo, this.state.About);
+  },
+
+  updatePhoto: function updatePhoto(event) {
+    var newPhoto = event.currentTarget.value;
+    this.setState({
+      Photo: newPhoto
+    });
+  },
+
+  updateAbout: function updateAbout(event) {
+    var newAbout = event.currentTarget.value;
+    this.setState({
+      About: newAbout
+    });
+  },
+
+  // saveHandler() {
+  //   this.props.onEditSelect();
   // },
 
-  addBackHandler: function addBackHandler() {
+  backHandler: function backHandler() {
     this.props.onBackSelect();
   },
 
-  saveHandler: function saveHandler() {
-    this.props.onEditSelect();
-  },
-
   render: function render() {
-    var _this = this;
 
     return _react2["default"].createElement(
       "div",
@@ -417,14 +463,13 @@ var edit = _react2["default"].createClass({
         _react2["default"].createElement(
           "label",
           null,
-          "Edit URL: ",
-          _react2["default"].createElement("input", { type: "text" })
+          _react2["default"].createElement("input", { onChange: this.updatePhoto, type: "file", value: this.state.Photo })
         ),
         _react2["default"].createElement(
           "label",
           null,
-          "Edit Description: ",
-          _react2["default"].createElement("input", { type: "text" })
+          "Edit About: ",
+          _react2["default"].createElement("input", { onChange: this.updateAbout, type: "text", placeholder: "Edit About", value: this.state.About })
         )
       ),
       _react2["default"].createElement(
@@ -432,16 +477,12 @@ var edit = _react2["default"].createClass({
         null,
         _react2["default"].createElement(
           "button",
-          { onClick: function () {
-              return _this.saveHandler();
-            } },
+          { onClick: this.submitHandler },
           "Save"
         ),
         _react2["default"].createElement(
           "button",
-          { onClick: function () {
-              return _this.addBackHandler();
-            } },
+          { onClick: this.backHandler },
           "Back"
         )
       )
