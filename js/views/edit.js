@@ -44,8 +44,8 @@ let edit = React.createClass({
     return (
       <div className="edit">
         <form onSubmit={this.submitHandler}>
-         <label><input onChange={this.updatePhoto} type="text" value ={this.state.Photo}></input></label>
-         <label>Edit About: <input onChange={this.updateAbout} type="text" value={this.state.About}/>
+         <label>URL<input onChange={this.updatePhoto} type="text" value ={this.state.Photo}></input></label>
+         <label>Edit About <input onChange={this.updateAbout} type="text" value={this.state.About}/>
          </label>
         </form>
 

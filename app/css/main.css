@@ -2044,7 +2044,7 @@ header {
     margin: 0;
     padding-left: 60px;
     font-family: 'Rochester', cursive;
-    font-size: 19px;
+    font-size: 20px;
     float: left; }
   header input {
     border-radius: 15px;
@@ -2060,6 +2060,7 @@ header {
     width: 222px;
     margin: 0;
     padding-right: 151px;
+    padding-top: 8px;
     float: right;
     color: #125688;
     font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif;
@@ -2120,7 +2121,7 @@ header {
   height: 1350px;
   margin: auto;
   clear: both;
-  padding: 40px 0 40px 0; }
+  padding: 40px 0 50px 0; }
 
 img {
   margin: 15px;
@@ -2167,6 +2168,7 @@ footer {
 
 .image {
   width: 670px;
+  height: 700px;
   margin: auto;
   padding-top: 20px; }
   .image img {
@@ -2182,6 +2184,12 @@ footer {
     outline: none;
     color: white;
     font-size: 14px; }
+
+.image-about {
+  clear: both;
+  padding-left: 15px;
+  color: #125688;
+  font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif 100; }
 
 .add {
   width: 670px;
@@ -2213,41 +2221,66 @@ footer {
     font-size: 14px;
     display: inline-block; }
 
-.edit .add {
+.edit {
   width: 670px;
   margin: auto;
   padding-top: 40px; }
+  .edit form {
+    width: 190px;
+    height: 180px;
+    margin: auto;
+    padding-top: 40px;
+    font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif 100; }
+  .edit input {
+    margin-bottom: 20px; }
+  .edit label span {
+    font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif 100; }
+  .edit label input {
+    border-radius: 4px; }
+  .edit div {
+    width: 190px;
+    height: 120px;
+    margin: auto; }
+  .edit button {
+    width: 60px;
+    height: 30px;
+    margin-right: 5px;
+    border: 0;
+    border-radius: 4px;
+    outline: none;
+    color: white;
+    font-size: 14px;
+    display: inline-block; }
 
-.edit form {
-  width: 190px;
-  height: 180px;
+.add {
+  width: 670px;
   margin: auto;
-  padding-top: 40px;
-  font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif 100; }
-
-.edit input {
-  margin-bottom: 20px; }
-
-.edit label span {
-  font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif 100; }
-
-.edit label input {
-  border-radius: 4px; }
-
-.edit div {
-  width: 190px;
-  height: 120px;
-  margin: auto; }
-
-.edit button {
-  width: 60px;
-  height: 30px;
-  margin-right: 5px;
-  border: 0;
-  border-radius: 4px;
-  outline: none;
-  color: white;
-  font-size: 14px;
-  display: inline-block; }
+  padding-top: 40px; }
+  .add form {
+    width: 190px;
+    height: 180px;
+    margin: auto;
+    padding-top: 40px;
+    font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif 100; }
+  .add input {
+    margin-bottom: 20px; }
+  .add label span {
+    font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif 100; }
+  .add label input {
+    border-radius: 4px; }
+  .add div {
+    width: 190px;
+    height: 120px;
+    margin: auto; }
+  .add button {
+    width: 60px;
+    height: 30px;
+    margin-right: 5px;
+    border: 0;
+    border-radius: 4px;
+    outline: none;
+    color: white;
+    font-size: 14px;
+    display: inline-block; }
 
 /*# sourceMappingURL=main.css.map */

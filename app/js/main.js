@@ -371,13 +371,13 @@ var add = _react2["default"].createClass({
         _react2["default"].createElement(
           "label",
           null,
-          "Upload URL",
+          "URL",
           _react2["default"].createElement("input", { onChange: this.updatePhoto, type: "text" })
         ),
         _react2["default"].createElement(
           "label",
           null,
-          "Description: ",
+          "About ",
           _react2["default"].createElement("input", { onChange: this.updateAbout, type: "text" })
         )
       ),
@@ -464,12 +464,13 @@ var edit = _react2["default"].createClass({
         _react2["default"].createElement(
           "label",
           null,
+          "URL",
           _react2["default"].createElement("input", { onChange: this.updatePhoto, type: "text", value: this.state.Photo })
         ),
         _react2["default"].createElement(
           "label",
           null,
-          "Edit About: ",
+          "Edit About ",
           _react2["default"].createElement("input", { onChange: this.updateAbout, type: "text", value: this.state.About })
         )
       ),
@@ -538,12 +539,6 @@ var image = _react2["default"].createClass({
       _react2["default"].createElement("image", { src: this.props.data.Photo }),
       _react2["default"].createElement(
         "div",
-        { className: "image-about" },
-        " ",
-        this.props.data.About
-      ),
-      _react2["default"].createElement(
-        "div",
         null,
         _react2["default"].createElement(
           "button",
@@ -567,6 +562,12 @@ var image = _react2["default"].createClass({
             } },
           "Back"
         )
+      ),
+      _react2["default"].createElement(
+        "div",
+        { className: "image-about" },
+        " ",
+        this.props.data.About
       )
     );
   }

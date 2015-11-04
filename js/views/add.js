@@ -32,8 +32,8 @@ let add = React.createClass({
     return  (
       <div className="add">
         <form onSubmit={this.submitHandler}>
-          <label>Upload URL<input onChange={this.updatePhoto} type="text"></input></label>
-          <label>Description: <input onChange={this.updateAbout} type="text"/></label>
+          <label>URL<input onChange={this.updatePhoto} type="text"></input></label>
+          <label>About <input onChange={this.updateAbout} type="text"/></label>
         </form>
         <div>
         <button onClick={this.submitHandler}>Save</button>

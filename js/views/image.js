@@ -31,18 +31,13 @@ let image = React.createClass({
       <div className="image" key={this.props.data.objectId} 
           onSelect={this.clickHandler}>
         <image src={this.props.data.Photo}/>
-        <div className="image-about"> {this.props.data.About}
-        </div>
-        
         <div>
-
           <button key={this.props.data.objectId} 
             onClick={() => this.editHandler(this.props.data.objectId)}>Edit</button>
-
-
           <button onClick={() => this.addHandler()}>Add</button>
           <button onClick={() => this.backHandler()}>Back</button>
         </div>
+        <div className="image-about"> {this.props.data.About}</div>
       </div>
     );
   }
