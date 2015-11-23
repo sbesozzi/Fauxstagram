@@ -1,8 +1,8 @@
 ## Faux Instagram 
 
 > Creating a faux Instagram app using Backbone and React
-- Deployed version at http://tiy.sarah.fauxstagram.surge.sh/#/
 
+- Deployed version at http://tiy.sarah.fauxstagram.surge.sh/#/
 
 ## Usage
 
